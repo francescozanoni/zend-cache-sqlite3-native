@@ -1,7 +1,7 @@
 {
   "name": "francescozanoni/zend-cache-sqlite3-native",
   "description": "SQLite 3 cache engine for Zend Framework 1, based on native driver",
-  "keywords": [“zend”, “zend framework”, “zend framework 1”, “sqlite”, “sqlite 3”, “cache”, “caching”],
+  "keywords": ["zend", "zend framework", "zend framework 1", "sqlite", "sqlite 3", "cache", "caching"],
   "type": "library",
   "authors": [
     {
