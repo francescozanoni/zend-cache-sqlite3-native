@@ -33,3 +33,52 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
      */
     public function testCachedItem()
     {
+
+        $cache = $this->_getCache();
+
+        $cache->save('cached_item_value', 'cached_item_key');
+        $cachedItemValue = $cache->load('cached_item_key');
+
+        $this->assertEquals('cached_item_value', $cachedItemValue);
+
+    }
+
+    /**
+     * Ensure trying to cache an uncacheable value throws a Zend_Cache_Exception.
+     */
+    public function testUncacheableItem()
+    {
+
+        $cache = $this->_getCache();
+
+        try {
+
+            $cache->save(true, 'uncacheable_item_key');
+
+        } catch (Exception $e) {
+
+            $this->assertInstanceOf('Zend_Cache_Exception', $e);
+            $this->assertEquals(
+                'Datas must be string or set automatic_serialization = true',
+                $e->getMessage()
+            );
+
+        }
+
+    }
+
+    /**
+     * @return Zend_Cache_Core
+     */
+    protected function _getCache()
+    {
+
+        return $this->bootstrap
+            ->getBootstrap()
+            ->getPluginResource('cachemanager')
+            ->getCacheManager()
+            ->getCache('cachename');
+
+    }
+
+}
